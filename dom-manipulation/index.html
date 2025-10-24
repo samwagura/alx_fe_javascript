@@ -1,40 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Quote Generator with Category Filter</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dynamic Quote Generator — Sync & Conflicts</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Dynamic Quote Generator</h1>
+  <main class="container">
+    <h1>Dynamic Quote Generator — Sync Demo</h1>
 
-  <!-- Category Filter -->
-  <label for="categoryFilter">Filter by Category:</label>
-  <select id="categoryFilter" onchange="filterQuotes()">
-    <option value="all">All Categories</option>
-  </select>
+    <section class="controls">
+      <label for="categoryFilter">Category:</label>
+      <select id="categoryFilter"><option value="all">All</option></select>
 
-  <!-- Display Area -->
-  <div id="quoteDisplay">
-    <p id="quoteText">Select a category or click “Show New Quote” to begin.</p>
-    <span id="quoteCategory"></span>
-  </div>
+      <button id="showRandom">Show New Quote</button>
 
-  <button id="newQuote">Show New Quote</button>
+      <label class="inline">
+        <input type="checkbox" id="autoSync" checked /> Auto-sync (every 10s)
+      </label>
 
-  <!-- Add New Quote -->
-  <h3>Add a New Quote</h3>
-  <div id="addQuoteForm">
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button id="addQuoteBtn">Add Quote</button>
-  </div>
+      <button id="forceSync">Force Sync Now</button>
+    </section>
 
-  <!-- Import / Export -->
-  <h3>Import / Export Quotes</h3>
-  <button id="exportBtn">Export Quotes (JSON)</button>
-  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+    <section id="statusBar">
+      <span id="syncStatus">Idle</span>
+      <span id="lastSync">Last: never</span>
+      <span id="updatesCount" class="badge" hidden>0 updates</span>
+    </section>
+
+    <section id="quoteDisplay" class="card">
+      <p id="quoteText">Click "Show New Quote"</p>
+      <small id="quoteCategory"></small>
+    </section>
+
+    <section class="add-area">
+      <input id="newText" placeholder="New quote text" />
+      <input id="newCat" placeholder="New quote category" />
+      <button id="addBtn">Add Quote</button>
+    </section>
+
+    <section class="import-export">
+      <button id="exportBtn">Export JSON</button>
+      <input id="importFile" type="file" accept=".json" />
+    </section>
+
+    <section class="quote-list">
+      <h3>All Quotes (Local)</h3>
+      <div id="quotesList"></div>
+    </section>
+
+    <!-- Conflict panel -->
+    <div id="conflictsPanel" class="modal hidden">
+      <div class="modal-content">
+        <h3>Conflicts detected</h3>
+        <p id="conflictCount"></p>
+        <div id="conflictList"></div>
+        <div class="modal-actions">
+          <button id="resolveAllServer">Resolve all: Keep Server</button>
+          <button id="resolveAllLocal">Resolve all: Keep Local</button>
+          <button id="closeConflicts">Close</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
 
   <script src="script.js"></script>
 </body>
