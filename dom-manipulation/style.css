@@ -1,58 +1,23 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f7fa;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px;
-}
-
-h1 {
-  color: #333;
-}
-
-#quoteDisplay {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  text-align: center;
-  width: 80%;
-  max-width: 500px;
-  margin-bottom: 20px;
-}
-
-#quoteDisplay p {
-  font-size: 1.1em;
-  color: #444;
-  margin-bottom: 10px;
-}
-
-#quoteDisplay span {
-  font-style: italic;
-  color: #777;
-}
-
-select,
-input,
-button {
-  margin: 8px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-button {
-  cursor: pointer;
-  background: #007bff;
-  color: white;
-  border: none;
-}
-
-button:hover {
-  background: #0056b3;
-}
-
-h3 {
-  margin-top: 30px;
-}
+:root { --bg:#f4f7fa; --card:#fff; --accent:#007bff; --danger:#cc1f1f; }
+*{box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:var(--bg);padding:24px;display:flex;justify-content:center}
+.container{width:100%;max-width:980px}
+h1{text-align:center;margin:0 0 16px}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.inline{display:inline-flex;align-items:center;gap:6px}
+.card{background:var(--card);padding:18px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.06);text-align:center;margin-bottom:12px}
+#statusBar{display:flex;gap:12px;justify-content:center;margin-bottom:12px;align-items:center}
+.badge{background:#ffdd57;padding:6px 8px;border-radius:12px}
+.add-area{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+.add-area input{padding:8px;border-radius:6px;border:1px solid #ddd}
+.add-area button{padding:8px 12px;border-radius:6px;background:var(--accent);color:#fff;border:none}
+.quote-list{background:transparent;padding-top:8px}
+.quote-item{background:#fff;padding:10px;border-radius:6px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;border:1px solid #eef}
+.quote-item .meta{max-width:80%}
+.small{padding:6px 10px;border-radius:6px}
+.remove-btn{background:var(--danger);color:#fff;border:none;padding:6px 8px;border-radius:6px}
+.hidden{display:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center}
+.modal-content{background:#fff;padding:18px;border-radius:8px;width:90%;max-width:720px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+button{cursor:pointer}
