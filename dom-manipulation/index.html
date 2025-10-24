@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dynamic Quote Generator — Storage & JSON</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Quote Generator with Category Filter</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="container">
-    <h1>Dynamic Quote Generator</h1>
+  <h1>Dynamic Quote Generator</h1>
 
-    <section class="controls">
-      <label for="categorySelect">Category:</label>
-      <select id="categorySelect">
-        <option value="all">All Categories</option>
-      </select>
+  <!-- Category Filter -->
+  <label for="categoryFilter">Filter by Category:</label>
+  <select id="categoryFilter" onchange="filterQuotes()">
+    <option value="all">All Categories</option>
+  </select>
 
-      <button id="newQuote">Show New Quote</button>
-      <button id="clearAllBtn" title="Remove all quotes from storage">Clear All Quotes</button>
-    </section>
+  <!-- Display Area -->
+  <div id="quoteDisplay">
+    <p id="quoteText">Select a category or click “Show New Quote” to begin.</p>
+    <span id="quoteCategory"></span>
+  </div>
 
-    <section id="quoteDisplay" class="card">
-      <p id="quoteText">Select a category or click “Show New Quote” to begin.</p>
-      <span id="quoteCategory"></span>
-    </section>
+  <button id="newQuote">Show New Quote</button>
 
-    <section class="add-form-area">
-      <h2>Add a New Quote</h2>
-      <div id="addQuoteForm"></div>
-    </section>
+  <!-- Add New Quote -->
+  <h3>Add a New Quote</h3>
+  <div id="addQuoteForm">
+    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+    <button id="addQuoteBtn">Add Quote</button>
+  </div>
 
-    <section class="import-export">
-      <h3>Import / Export</h3>
-      <input type="file" id="importFile" accept=".json" />
-      <button id="exportBtn">Export Quotes (JSON)</button>
-    </section>
-
-    <section class="quote-list-area">
-      <h2>All Stored Quotes</h2>
-      <div id="quotesList"></div>
-    </section>
-  </main>
+  <!-- Import / Export -->
+  <h3>Import / Export Quotes</h3>
+  <button id="exportBtn">Export Quotes (JSON)</button>
+  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
 
   <script src="script.js"></script>
 </body>
