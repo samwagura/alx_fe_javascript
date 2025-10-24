@@ -29,6 +29,7 @@ async function fetchQuotesFromServer() {
     return serverQuotes;
   } catch (error) {
     console.error("Error fetching quotes from server:", error);
+    showNotification("Error fetching quotes from server.", "warning");
     return [];
   }
 }
@@ -47,6 +48,7 @@ async function postQuotesToServer(quotesToSync) {
     console.log("Posted quotes to server:", result);
   } catch (error) {
     console.error("Error posting quotes:", error);
+    showNotification("Error posting quotes to server.", "warning");
   }
 }
 
@@ -55,6 +57,8 @@ async function postQuotesToServer(quotesToSync) {
 // -------------------------------
 async function syncQuotes() {
   console.log("Syncing quotes...");
+  showNotification("Syncing quotes with server...", "info");
+
   const serverQuotes = await fetchQuotesFromServer();
   const localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
 
@@ -71,7 +75,7 @@ async function syncQuotes() {
   // Simulate posting updated local quotes back to server
   await postQuotesToServer(mergedQuotes);
 
-  showNotification("Quotes synced successfully (Server data prioritized)");
+  showNotification("Quotes synced successfully (Server data prioritized)", "success");
 }
 
 // -------------------------------
@@ -98,10 +102,18 @@ function showRandomQuote() {
 // -------------------------------
 // UI NOTIFICATION FOR UPDATES/CONFLICTS
 // -------------------------------
-function showNotification(message) {
-  let notif = document.createElement("div");
+function showNotification(message, type = "info") {
+  const notif = document.getElementById("notification");
+  if (!notif) return;
+
   notif.textContent = message;
-  notif.style.background = "#007bff";
+  notif.style.display = "block";
+  notif.style.background =
+    type === "success"
+      ? "#28a745"
+      : type === "warning"
+      ? "#ffc107"
+      : "#007bff";
   notif.style.color = "white";
   notif.style.padding = "10px";
   notif.style.borderRadius = "5px";
@@ -110,8 +122,10 @@ function showNotification(message) {
   notif.style.right = "20px";
   notif.style.zIndex = "1000";
 
-  document.body.appendChild(notif);
-  setTimeout(() => notif.remove(), 4000);
+  // Hide after 4 seconds
+  setTimeout(() => {
+    notif.style.display = "none";
+  }, 4000);
 }
 
 // -------------------------------
